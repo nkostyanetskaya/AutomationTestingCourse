@@ -1,1 +1,2 @@
 # AutomationTestingCourse
+Repository for AutomationTestingCourse
