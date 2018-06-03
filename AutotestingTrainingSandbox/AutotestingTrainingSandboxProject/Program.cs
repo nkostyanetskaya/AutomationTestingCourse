@@ -86,31 +86,30 @@ namespace AutotestingTrainingSandboxProject
 
         private static void PrintTranslation(Language originalLanguage, Language targetLanguage, int selectedPhrase)
         {
-            var phrases = _dictionary[selectedPhrase - 1];
-            foreach (var phrase in phrases)
+            LocalizedText originalPhrase = null, targetPhrase = null;
+            foreach (var phrase in _dictionary[selectedPhrase - 1])
             {
                 if (phrase.Language == originalLanguage)
                 {
-                    Console.WriteLine($"Original phrase:\n{phrase}");
+                    originalPhrase = phrase;
                 }
-            }
 
-            foreach (var phrase in phrases)
-            {
                 if (phrase.Language == targetLanguage)
                 {
-                    Console.WriteLine($"Translated phrase:\n{phrase}");
+                    targetPhrase = phrase;
                 }
             }
 
+            Console.WriteLine($"Original phrase:\n{originalPhrase}");
+            Console.WriteLine($"Translated phrase:\n{targetPhrase}");
         }
 
         private static int CountPhrases(Language language)
         {
             var counter = 0;
-            for (int i = 0; i < _dictionary.Length; i++)
+            foreach (var phrases in _dictionary)
             {
-                foreach (var phrase in _dictionary[i])
+                foreach (var phrase in phrases)
                 {
                     if (phrase.Language == language)
                     {
@@ -161,8 +160,8 @@ namespace AutotestingTrainingSandboxProject
             var originalLanguage = SelectLanguage();
             PrintPhrases(originalLanguage);
             Console.Write("\nEnter a data for the translation below.");
-            var targetLanguage = SelectLanguage();
             var selectedPhrase = SelectPhrase(originalLanguage);
+            var targetLanguage = SelectLanguage();
             PrintTranslation(originalLanguage, targetLanguage, selectedPhrase);
             WaitKeyPressForExit();
         }
