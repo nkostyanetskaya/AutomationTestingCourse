@@ -5,32 +5,40 @@ namespace AutotestingTrainingSandboxProject
 {
     internal static class Program
     {
-        private static readonly Dictionary<Language, string[]> _phrases = new Dictionary<Language, string[]> {
+        private static readonly Dictionary<Language, string[]> _phrases = new Dictionary<Language, string[]>
+        {
             {
                 Language.English,
-                new[] {
+                new[]
+                {
                     "Hello world!",
                     "Good morning!",
                     "Thank you very much!"
                 }
-            }, {
+            },
+            {
                 Language.German,
-                new[] {
+                new[]
+                {
                     "Hallo Welt!",
                     "Guten Morgen!",
                     "Vielen Dank!"
                 }
-            }, {
+            },
+            {
                 Language.French,
-                new[] {
+                new[]
+                {
                     "Bonjour le monde!",
                     "Bon matin!",
                     "Merci beaucoup!"
                 }
-            }, {
+            },
+            {
                 Language.Russian,
                 new string[0]
-            }, {
+            },
+            {
                 Language.Ukrainian,
                 null
             }
