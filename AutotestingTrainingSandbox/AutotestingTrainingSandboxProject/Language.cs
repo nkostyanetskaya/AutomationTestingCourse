@@ -1,6 +1,6 @@
 ﻿namespace AutotestingTrainingSandboxProject
 {
-    public enum Language
+    internal enum Language
     {
         English,
         German,
