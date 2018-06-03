@@ -4,8 +4,6 @@
     {
         English,
         German,
-        French,
-        Russian,
-        Ukrainian
+        French
     }
 }

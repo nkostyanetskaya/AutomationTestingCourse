@@ -1,48 +1,67 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace AutotestingTrainingSandboxProject
 {
     internal static class Program
     {
-        private static readonly Dictionary<Language, string[]> _phrases = new Dictionary<Language, string[]>
+        private static readonly LocalizedText[][] _dictionary = new[]
         {
+            new[]
             {
-                Language.English,
-                new[]
+                new LocalizedText
                 {
-                    "Hello world!",
-                    "Good morning!",
-                    "Thank you very much!"
+                    Language = Language.English,
+                    Text = "Hello world!"
+                },
+                new LocalizedText
+                {
+                    Language = Language.German,
+                    Text = "Hallo Welt!"
+                },
+                new LocalizedText
+                {
+                    Language = Language.French,
+                    Text = "Bonjour le monde!"
                 }
             },
+            new[]
             {
-                Language.German,
-                new[]
+                new LocalizedText
                 {
-                    "Hallo Welt!",
-                    "Guten Morgen!",
-                    "Vielen Dank!"
+                    Language = Language.English,
+                    Text = "Good morning!"
+                },
+                new LocalizedText
+                {
+                    Language = Language.German,
+                    Text = "Guten Morgen!"
+                },
+                new LocalizedText
+                {
+                    Language = Language.French,
+                    Text = "Bon matin!"
                 }
             },
+            new[]
             {
-                Language.French,
-                new[]
+                new LocalizedText
                 {
-                    "Bonjour le monde!",
-                    "Bon matin!",
-                    "Merci beaucoup!"
+                    Language = Language.English,
+                    Text = "Thank you very much!"
+                },
+                new LocalizedText
+                {
+                    Language = Language.German,
+                    Text = "Vielen Dank!"
+                },
+                new LocalizedText
+                {
+                    Language = Language.French,
+                    Text = "Merci beaucoup!"
                 }
-            },
-            {
-                Language.Russian,
-                new string[0]
-            },
-            {
-                Language.Ukrainian,
-                null
             }
         };
+
 
         private static void WaitKeyPressForExit()
         {
@@ -50,13 +69,69 @@ namespace AutotestingTrainingSandboxProject
             Console.ReadLine();
         }
 
-        private static void PrintSelectedLanguagePhrases(Language selectedLanguage)
+        private static void PrintPhrases(Language language)
         {
             Console.WriteLine("\nThe following phrases available:");
-            foreach (var phrase in _phrases[selectedLanguage])
+            for (int i = 0; i < _dictionary.Length; i++)
             {
-                Console.WriteLine(phrase);
+                foreach (var phrase in _dictionary[i])
+                {
+                    if (phrase.Language == language)
+                    {
+                        Console.WriteLine($"{i+1}) {phrase}");
+                    }
+                }
             }
+        }
+
+        private static void PrintTranslation(Language originalLanguage, Language targetLanguage, int selectedPhrase)
+        {
+            var phrases = _dictionary[selectedPhrase - 1];
+            foreach (var phrase in phrases)
+            {
+                if (phrase.Language == originalLanguage)
+                {
+                    Console.WriteLine($"Original phrase:\n{phrase}");
+                }
+            }
+
+            foreach (var phrase in phrases)
+            {
+                if (phrase.Language == targetLanguage)
+                {
+                    Console.WriteLine($"Translated phrase:\n{phrase}");
+                }
+            }
+
+        }
+
+        private static int CountPhrases(Language language)
+        {
+            var counter = 0;
+            for (int i = 0; i < _dictionary.Length; i++)
+            {
+                foreach (var phrase in _dictionary[i])
+                {
+                    if (phrase.Language == language)
+                    {
+                        counter++;
+                    }
+                }
+            }
+
+            return counter;
+        }
+
+        private static int SelectPhrase(Language language)
+        {
+            Console.WriteLine("\nPlease select a number of the phrase for translation:");
+            int selectedPhrase;
+            while (!int.TryParse(Console.ReadLine(), out selectedPhrase) && selectedPhrase >0 && selectedPhrase <= CountPhrases(language))
+            {
+                Console.WriteLine("Incorrect number.\nPlease try again:");
+            }
+
+            return selectedPhrase;
         }
 
         private static Language SelectLanguage()
@@ -71,23 +146,24 @@ namespace AutotestingTrainingSandboxProject
             return selectedLanguage;
         }
 
-        private static void PrintNonEmptyLanguages()
+        private static void PrintLanguages()
         {
-            Console.WriteLine("The following languages contain at least one phrase:");
-            foreach (var item in _phrases)
+            Console.WriteLine("There are the following languages available:");
+            foreach (var language in Enum.GetNames(typeof(Language)))
             {
-                if (item.Value != null && item.Value.Length > 0)
-                {
-                    Console.WriteLine(item.Key);
-                }
+                Console.WriteLine(language);
             }
         }
 
         private static void Main()
         {
-            PrintNonEmptyLanguages();
-            Language selectedLanguage = SelectLanguage();
-            PrintSelectedLanguagePhrases(selectedLanguage);
+            PrintLanguages();
+            var originalLanguage = SelectLanguage();
+            PrintPhrases(originalLanguage);
+            Console.Write("\nEnter a data for the translation below.");
+            var targetLanguage = SelectLanguage();
+            var selectedPhrase = SelectPhrase(originalLanguage);
+            PrintTranslation(originalLanguage, targetLanguage, selectedPhrase);
             WaitKeyPressForExit();
         }
     }
