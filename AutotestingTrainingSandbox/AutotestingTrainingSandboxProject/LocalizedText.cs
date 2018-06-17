@@ -2,8 +2,14 @@
 {
     internal class LocalizedText
     {
-        public Language Language { get; set; }
-        public string Text { get; set; }
+        public Language Language { get; private set; }
+        public string Text { get; private set; }
+
+        public LocalizedText(Language language, string text)
+        {
+            Language = language;
+            Text = text;
+        }
 
         public override string ToString()
         {

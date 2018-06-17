@@ -4,61 +4,25 @@ namespace AutotestingTrainingSandboxProject
 {
     internal static class Program
     {
-        private static readonly LocalizedText[][] _dictionary = new[]
+        private static readonly LocalizedText[][] dictionary = new[]
         {
             new[]
             {
-                new LocalizedText
-                {
-                    Language = Language.English,
-                    Text = "Hello world!"
-                },
-                new LocalizedText
-                {
-                    Language = Language.German,
-                    Text = "Hallo Welt!"
-                },
-                new LocalizedText
-                {
-                    Language = Language.French,
-                    Text = "Bonjour le monde!"
-                }
+                new LocalizedText(Language.English, "Hello world!"),              
+                new LocalizedText(Language.German, "Hallo Welt!"),
+                new LocalizedText(Language.French, "Bonjour le monde!")
             },
             new[]
             {
-                new LocalizedText
-                {
-                    Language = Language.English,
-                    Text = "Good morning!"
-                },
-                new LocalizedText
-                {
-                    Language = Language.German,
-                    Text = "Guten Morgen!"
-                },
-                new LocalizedText
-                {
-                    Language = Language.French,
-                    Text = "Bon matin!"
-                }
+                new LocalizedText(Language.English, "Good morning!"),
+                new LocalizedText(Language.German, "Guten Morgen!"),
+                new LocalizedText(Language.French, "Bon matin!")
             },
             new[]
             {
-                new LocalizedText
-                {
-                    Language = Language.English,
-                    Text = "Thank you very much!"
-                },
-                new LocalizedText
-                {
-                    Language = Language.German,
-                    Text = "Vielen Dank!"
-                },
-                new LocalizedText
-                {
-                    Language = Language.French,
-                    Text = "Merci beaucoup!"
-                }
+                new LocalizedText(Language.English, "Thank you very much!"),
+                new LocalizedText(Language.German, "Vielen Dank!"),
+                new LocalizedText(Language.French, "Merci beaucoup!")
             }
         };
 
@@ -72,13 +36,13 @@ namespace AutotestingTrainingSandboxProject
         private static void PrintPhrases(Language language)
         {
             Console.WriteLine("\nThe following phrases available:");
-            for (int i = 0; i < _dictionary.Length; i++)
+            for (int i = 0; i < dictionary.Length; i++)
             {
-                foreach (var phrase in _dictionary[i])
+                foreach (var phrase in dictionary[i])
                 {
                     if (phrase.Language == language)
                     {
-                        Console.WriteLine($"{i+1}) {phrase}");
+                        Console.WriteLine("{0}) {1}", i+1, phrase);
                     }
                 }
             }
@@ -87,7 +51,7 @@ namespace AutotestingTrainingSandboxProject
         private static void PrintTranslation(Language originalLanguage, Language targetLanguage, int selectedPhrase)
         {
             LocalizedText originalPhrase = null, targetPhrase = null;
-            foreach (var phrase in _dictionary[selectedPhrase - 1])
+            foreach (var phrase in dictionary[selectedPhrase - 1])
             {
                 if (phrase.Language == originalLanguage)
                 {
@@ -100,14 +64,14 @@ namespace AutotestingTrainingSandboxProject
                 }
             }
 
-            Console.WriteLine($"Original phrase:\n{originalPhrase}");
-            Console.WriteLine($"Translated phrase:\n{targetPhrase}");
+            Console.WriteLine("Original phrase:\n{0}", originalPhrase);
+            Console.WriteLine("Translated phrase:\n{0}", targetPhrase);
         }
 
         private static int CountPhrases(Language language)
         {
             var counter = 0;
-            foreach (var phrases in _dictionary)
+            foreach (var phrases in dictionary)
             {
                 foreach (var phrase in phrases)
                 {
