@@ -89,7 +89,7 @@ namespace AutotestingTrainingSandboxProject
         {
             Console.WriteLine("\nPlease select a number of the phrase for translation:");
             int selectedPhrase;
-            while (!int.TryParse(Console.ReadLine(), out selectedPhrase) && selectedPhrase >0 && selectedPhrase <= CountPhrases(language))
+            while (!int.TryParse(Console.ReadLine(), out selectedPhrase) || !(selectedPhrase > 0 && selectedPhrase <= CountPhrases(language)))
             {
                 Console.WriteLine("Incorrect number.\nPlease try again:");
             }
@@ -101,7 +101,7 @@ namespace AutotestingTrainingSandboxProject
         {
             Console.WriteLine("\nPlease select a language:");
             Language selectedLanguage;
-            while (!Enum.TryParse(Console.ReadLine(), out selectedLanguage))
+            while (!Enum.TryParse(Console.ReadLine(), true, out selectedLanguage) || !(selectedLanguage > 0 && (int)selectedLanguage <= Enum.GetValues(typeof(Language)).Length))
             {
                 Console.WriteLine("Incorrect language.\nPlease try again:");
             }

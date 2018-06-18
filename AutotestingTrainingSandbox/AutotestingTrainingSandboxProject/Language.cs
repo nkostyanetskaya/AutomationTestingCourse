@@ -2,7 +2,7 @@
 {
     internal enum Language
     {
-        English,
+        English = 1,
         German,
         French
     }
