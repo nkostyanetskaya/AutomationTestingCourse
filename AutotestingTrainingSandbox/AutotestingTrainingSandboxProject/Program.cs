@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace AutotestingTrainingSandboxProject
 {
@@ -38,51 +39,25 @@ namespace AutotestingTrainingSandboxProject
             Console.WriteLine("\nThe following phrases available:");
             for (int i = 0; i < dictionary.Length; i++)
             {
-                foreach (var phrase in dictionary[i])
+                var phrase = dictionary[i].FirstOrDefault(x => x.Language == language);
+                if (phrase != null)
                 {
-                    if (phrase.Language == language)
-                    {
-                        Console.WriteLine("{0}) {1}", i+1, phrase);
-                    }
-                }
+                    Console.WriteLine("{0}) {1}", i + 1, phrase);
+                }              
             }
         }
 
         private static void PrintTranslation(Language originalLanguage, Language targetLanguage, int selectedPhrase)
         {
-            LocalizedText originalPhrase = null, targetPhrase = null;
-            foreach (var phrase in dictionary[selectedPhrase - 1])
-            {
-                if (phrase.Language == originalLanguage)
-                {
-                    originalPhrase = phrase;
-                }
-
-                if (phrase.Language == targetLanguage)
-                {
-                    targetPhrase = phrase;
-                }
-            }
-
+            var originalPhrase = dictionary[selectedPhrase - 1].FirstOrDefault(x => x.Language == originalLanguage);
+            var targetPhrase = dictionary[selectedPhrase - 1].FirstOrDefault(x => x.Language == targetLanguage);
             Console.WriteLine("Original phrase:\n{0}", originalPhrase);
-            Console.WriteLine("Translated phrase:\n{0}", targetPhrase);
+            Console.WriteLine("Translated phrase:\n{0}", targetPhrase);   
         }
 
         private static int CountPhrases(Language language)
         {
-            var counter = 0;
-            foreach (var phrases in dictionary)
-            {
-                foreach (var phrase in phrases)
-                {
-                    if (phrase.Language == language)
-                    {
-                        counter++;
-                    }
-                }
-            }
-
-            return counter;
+            return dictionary.SelectMany(phrases => phrases).Count(phrase => phrase.Language == language);
         }
 
         private static int SelectPhrase(Language language)
