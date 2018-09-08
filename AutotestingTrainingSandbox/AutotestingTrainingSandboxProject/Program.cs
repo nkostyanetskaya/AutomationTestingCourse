@@ -1,11 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 
 namespace AutotestingTrainingSandboxProject
 {
     internal static class Program
     {
-        private static readonly LocalizedText[][] dictionary = new[]
+        private static readonly LocalizedText[][] _dictionary = 
         {
             new[]
             {
@@ -37,9 +38,9 @@ namespace AutotestingTrainingSandboxProject
         private static void PrintPhrases(Language language)
         {
             Console.WriteLine("\nThe following phrases available:");
-            for (int i = 0; i < dictionary.Length; i++)
+            for (var i = 0; i < _dictionary.Length; i++)
             {
-                var phrase = dictionary[i].FirstOrDefault(x => x.Language == language);
+                var phrase = _dictionary[i].FirstOrDefault(x => x.Language == language);
                 if (phrase != null)
                 {
                     Console.WriteLine("{0}) {1}", i + 1, phrase);
@@ -49,15 +50,15 @@ namespace AutotestingTrainingSandboxProject
 
         private static void PrintTranslation(Language originalLanguage, Language targetLanguage, int selectedPhrase)
         {
-            var originalPhrase = dictionary[selectedPhrase - 1].FirstOrDefault(x => x.Language == originalLanguage);
-            var targetPhrase = dictionary[selectedPhrase - 1].FirstOrDefault(x => x.Language == targetLanguage);
+            var originalPhrase = _dictionary[selectedPhrase - 1].FirstOrDefault(x => x.Language == originalLanguage);
+            var targetPhrase = _dictionary[selectedPhrase - 1].FirstOrDefault(x => x.Language == targetLanguage);
             Console.WriteLine("Original phrase:\n{0}", originalPhrase);
             Console.WriteLine("Translated phrase:\n{0}", targetPhrase);   
         }
 
         private static int CountPhrases(Language language)
         {
-            return dictionary.SelectMany(phrases => phrases).Count(phrase => phrase.Language == language);
+            return _dictionary.SelectMany(phrases => phrases).Count(phrase => phrase.Language == language);
         }
 
         private static int SelectPhrase(Language language)
@@ -87,9 +88,18 @@ namespace AutotestingTrainingSandboxProject
         private static void PrintLanguages()
         {
             Console.WriteLine("There are the following languages available:");
-            foreach (var language in Enum.GetNames(typeof(Language)))
+            var enumType = typeof(Language);
+            foreach (var language in Enum.GetNames(enumType))
             {
-                Console.WriteLine(language);
+                var description = (DescriptionAttribute) Attribute.GetCustomAttribute(enumType.GetMember(language)[0], typeof(DescriptionAttribute));
+                Console.Write(language);
+
+                if (description?.Description != null)
+                {
+                    Console.Write(" [{0}]",description.Description);
+                }
+
+                Console.WriteLine();
             }
         }
 

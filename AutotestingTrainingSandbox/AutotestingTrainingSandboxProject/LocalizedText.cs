@@ -1,9 +1,9 @@
 ﻿namespace AutotestingTrainingSandboxProject
 {
-    internal class LocalizedText
+    public class LocalizedText
     {
-        public Language Language { get; private set; }
-        public string Text { get; private set; }
+        public Language Language { get; }
+        public string Text { get; }
 
         public LocalizedText(Language language, string text)
         {

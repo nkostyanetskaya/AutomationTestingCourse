@@ -1,9 +1,14 @@
-﻿namespace AutotestingTrainingSandboxProject
+﻿using System.ComponentModel;
+
+namespace AutotestingTrainingSandboxProject
 {
-    internal enum Language
+    public enum Language
     {
+        [Description("En")]
         English = 1,
+        [Description("De")]
         German,
+        [Description("Fr")]
         French
     }
 }
