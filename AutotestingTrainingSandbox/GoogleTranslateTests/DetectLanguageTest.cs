@@ -1,0 +1,6 @@
+﻿namespace GoogleTranslateTests
+{
+    class DetectLanguageTest
+    {
+    }
+}

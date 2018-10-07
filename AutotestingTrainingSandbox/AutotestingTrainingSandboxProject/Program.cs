@@ -6,11 +6,11 @@ namespace AutotestingTrainingSandboxProject
 {
     internal static class Program
     {
-        private static readonly LocalizedText[][] _dictionary = 
+        private static readonly LocalizedText[][] _dictionary =
         {
             new[]
             {
-                new LocalizedText(Language.English, "Hello world!"),              
+                new LocalizedText(Language.English, "Hello world!"),
                 new LocalizedText(Language.German, "Hallo Welt!"),
                 new LocalizedText(Language.French, "Bonjour le monde!")
             },
@@ -44,7 +44,7 @@ namespace AutotestingTrainingSandboxProject
                 if (phrase != null)
                 {
                     Console.WriteLine("{0}) {1}", i + 1, phrase);
-                }              
+                }
             }
         }
 
@@ -53,7 +53,7 @@ namespace AutotestingTrainingSandboxProject
             var originalPhrase = _dictionary[selectedPhrase - 1].FirstOrDefault(x => x.Language == originalLanguage);
             var targetPhrase = _dictionary[selectedPhrase - 1].FirstOrDefault(x => x.Language == targetLanguage);
             Console.WriteLine("Original phrase:\n{0}", originalPhrase);
-            Console.WriteLine("Translated phrase:\n{0}", targetPhrase);   
+            Console.WriteLine("Translated phrase:\n{0}", targetPhrase);
         }
 
         private static int CountPhrases(Language language)
