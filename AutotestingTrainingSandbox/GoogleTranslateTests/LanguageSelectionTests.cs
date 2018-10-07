@@ -1,44 +1,47 @@
-﻿using NUnit.Framework;
+﻿using GoogleTranslateTests.PageObjects;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
 namespace GoogleTranslateTests
 {
-    class LanguageSelectionTests
+    internal class LanguageSelectionTests
     {
         private const string LanguageName = "German";
-        private const string LanguageCode = "de";
 
-        private IWebDriver driver;
+        private IWebDriver _driver;
 
         [SetUp]
         public void Initialize()
         {
-            driver = new ChromeDriver();
-            driver.Url = "https://translate.google.com/";
+            _driver = new ChromeDriver();
+            _driver.Url = "https://translate.google.com/";
         }
 
         [Test]
         public void SourceLanguageSelectionTest()
         {
-            driver.FindElement(By.Id("gt-sl-gms")).Click();
-            driver.FindElement(By.XPath($"//div[@id='gt-sl-gms-menu']//div[contains(text(),'{LanguageName}')]")).Click();
-            var buttonClass = driver.FindElement(By.CssSelector($"#gt-lang-left div[value={LanguageCode}]")).GetAttribute("class");
+            var mainPage = new MainPage(_driver);
+            mainPage.SourceLanguageSelector.Click();
+            mainPage.GetButtonByText(mainPage.SourceLanguageMenu, LanguageName).Click();
+            var buttonClass = mainPage.GetButtonByText(mainPage.SourceLanguagePanel, LanguageName).GetAttribute("class");
             Assert.True(buttonClass.Contains("jfk-button-checked"));
         }
+
         [Test]
         public void TargetLanguageSelectionTest()
         {
-            driver.FindElement(By.Id("gt-tl-gms")).Click();
-            driver.FindElement(By.XPath($"//div[@id='gt-tl-gms-menu']//div[contains(text(),'{LanguageName}')]")).Click();
-            var buttonClass = driver.FindElement(By.CssSelector($"#gt-lang-right div[value={LanguageCode}]")).GetAttribute("class");
+            var mainPage = new MainPage(_driver);
+            mainPage.TargetLanguageSelector.Click();
+            mainPage.GetButtonByText(mainPage.TargetLanguageMenu, LanguageName).Click();
+            var buttonClass = mainPage.GetButtonByText(mainPage.TargetLanguagePanel, LanguageName).GetAttribute("class");
             Assert.True(buttonClass.Contains("jfk-button-checked"));
         }
 
         [TearDown]
         public void EndTest()
         {
-            driver.Close();
+            _driver.Close();
         }
     }
 }

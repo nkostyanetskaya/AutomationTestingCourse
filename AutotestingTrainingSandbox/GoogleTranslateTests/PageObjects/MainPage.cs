@@ -1,31 +1,33 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 
 namespace GoogleTranslateTests.PageObjects
 {
-    class MainPage
+    internal class MainPage
     {
-        [FindsBy(How = How.Id, Using = "gt-sl-gms")]
-        public IWebElement SourceLanguageSelector { get; set; }
+        private readonly IWebDriver _driver;
 
-        [FindsBy(How = How.Id, Using = "gt-tl-gms")]
-        public IWebElement TargetLanguageSelector { get; set; }
+        public IWebElement SourceLanguageSelector => _driver.FindElement(By.Id("gt-sl-gms"));
 
-        [FindsBy(How = How.Id, Using = "gt-sl-gms-menu")]
-        public IWebElement SourceLanguageMenu { get; set; }
+        public IWebElement TargetLanguageSelector => _driver.FindElement(By.Id("gt-tl-gms"));
 
-        [FindsBy(How = How.Id, Using = "gt-tl-gms-menu")]
-        public IWebElement TargetLanguageMenu { get; set; }
+        public IWebElement SourceLanguageMenu => _driver.FindElement(By.Id("gt-sl-gms-menu"));
 
-        [FindsBy(How = How.Id, Using = "gt-lang-left")]
-        public IWebElement SourceLanguagePanel { get; set; }
+        public IWebElement TargetLanguageMenu => _driver.FindElement(By.Id("gt-tl-gms-menu"));
 
-        [FindsBy(How = How.Id, Using = "gt-lang-right")]
-        public IWebElement TargetLanguagePanel { get; set; }
+        public IWebElement SourceLanguagePanel => _driver.FindElement(By.Id("gt-lang-left"));
 
-        public IWebElement GetLanguageButton(IWebElement languageMenu, string text)
+        public IWebElement TargetLanguagePanel => _driver.FindElement(By.Id("gt-lang-right"));
+
+        public IWebElement SourceTextArea => _driver.FindElement(By.Id("source"));
+
+        public IWebElement GetButtonByText(IWebElement buttonContainer, string text)
         {
-            return languageMenu.FindElement(By.XPath($"//div[contains(text(),'{text}')]"));
+            return buttonContainer.FindElement(By.XPath($"//div[contains(text(),'{text}')]"));
+        }
+
+        public MainPage(IWebDriver driver)
+        {
+            _driver = driver;
         }
     }
 }
