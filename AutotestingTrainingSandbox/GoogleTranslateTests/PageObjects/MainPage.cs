@@ -20,9 +20,11 @@ namespace GoogleTranslateTests.PageObjects
 
         public IWebElement SourceTextArea => _driver.FindElement(By.Id("source"));
 
+        public IWebElement SwapLanguagesButton => _driver.FindElement(By.Id("gt-swap"));
+
         public IWebElement GetButtonByText(IWebElement buttonContainer, string text)
         {
-            return buttonContainer.FindElement(By.XPath($"//div[contains(text(),'{text}')]"));
+            return buttonContainer.FindElement(By.XPath($".//div[contains(text(),'{text}')]"));
         }
 
         public MainPage(IWebDriver driver)
