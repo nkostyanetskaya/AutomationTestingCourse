@@ -45,11 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DetectLanguageTest.cs" />
     <Compile Include="PageObjects\MainPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="LanguageSelectionTests.cs" />
-    <Compile Include="SwapLanguagesTest.cs" />
+    <Compile Include="GoogleTranslateTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
