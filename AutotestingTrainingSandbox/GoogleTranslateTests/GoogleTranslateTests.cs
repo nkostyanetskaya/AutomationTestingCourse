@@ -28,9 +28,11 @@ namespace GoogleTranslateTests
         public void SourceLanguageSelectionTest()
         {
             var mainPage = new MainPage(_driver);
+
             mainPage.SourceLanguageSelector.Click();
             mainPage.GetButtonByText(mainPage.SourceLanguageMenu, SourceLanguageName).Click();
             var buttonClass = mainPage.GetButtonByText(mainPage.SourceLanguagePanel, SourceLanguageName).GetAttribute("class");
+
             Assert.True(buttonClass.Contains("jfk-button-checked"));
         }
 
@@ -38,9 +40,11 @@ namespace GoogleTranslateTests
         public void TargetLanguageSelectionTest()
         {
             var mainPage = new MainPage(_driver);
+
             mainPage.TargetLanguageSelector.Click();
             mainPage.GetButtonByText(mainPage.TargetLanguageMenu, TargetLanguageName).Click();
             var buttonClass = mainPage.GetButtonByText(mainPage.TargetLanguagePanel, TargetLanguageName).GetAttribute("class");
+
             Assert.True(buttonClass.Contains("jfk-button-checked"));
         }
 
@@ -72,11 +76,13 @@ namespace GoogleTranslateTests
         public void DetectLanguageTest()
         {
             var mainPage = new MainPage(_driver);
+
             mainPage.SourceTextArea.SendKeys(SourceText);
             var detectLanguageButton = mainPage.GetButtonByText(mainPage.SourceLanguagePanel, DetectLanguageButtonName);
             detectLanguageButton.Click();
             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
             wait.Until(driver => detectLanguageButton.Text != DetectLanguageButtonName);
+
             Assert.AreEqual(DetectGermanLanguageButtonName, detectLanguageButton.Text);
         }
 
