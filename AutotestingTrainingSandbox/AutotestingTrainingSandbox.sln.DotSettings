@@ -119,7 +119,7 @@
 	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=B5757FF7C12F8A4694FC88260EF86800/AbsolutePath/@EntryValue">D:\Projects\Appulate\sources\Appulate.sln.DotSettings</s:String>
 	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=B5757FF7C12F8A4694FC88260EF86800/RelativePath/@EntryValue"></s:String>
 	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=FileB5757FF7C12F8A4694FC88260EF86800/@KeyIndexDefined">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=FileB5757FF7C12F8A4694FC88260EF86800/IsOn/@EntryValue">False</s:Boolean>
+	
 	<s:Double x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=FileB5757FF7C12F8A4694FC88260EF86800/RelativePriority/@EntryValue">1</s:Double>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpAttributeForSingleLineMethodUpgrade/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpKeepExistingMigration/@EntryIndexedValue">True</s:Boolean>
